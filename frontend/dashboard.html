@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Prestador</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        #blur-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 998;
+            display: block;
+        }
+        .modal {
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div id="blur-overlay"></div>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal fade show" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" style="display: block;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Acesso Restrito</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Usuário</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Reserva de Horários</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="prestadores.html">Profissionais</a></li>
+                    <li class="nav-item"><a class="nav-link" href="servicos.html">Serviços</a></li>
+                    <li class="nav-item"><a class="nav-link" href="agendamento.html">Agendar</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="dashboard.html">Área do Prestador</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard -->
+    <section class="container my-5">
+        <h2 class="text-center">Painel do Prestador</h2>
+
+        <!-- Lista de agendamentos -->
+        <div class="mt-4">
+            <h4>Agendamentos</h4>
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Serviço</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="agendamentos-lista">
+                    <tr>
+                        <td>Maria Oliveira</td>
+                        <td>Corte de Cabelo</td>
+                        <td>01/03/2025</td>
+                        <td>14:00</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="removerAgendamento(this)">Cancelar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>João Souza</td>
+                        <td>Barba</td>
+                        <td>02/03/2025</td>
+                        <td>15:30</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="removerAgendamento(this)">Cancelar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Formulário para adicionar horários disponíveis -->
+        <div class="mt-4">
+            <h4>Adicionar Horários Disponíveis</h4>
+            <form id="horarioForm">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="dataDisponivel" class="form-label">Data</label>
+                        <input type="date" class="form-control" id="dataDisponivel" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="horaDisponivel" class="form-label">Horário</label>
+                        <input type="time" class="form-control" id="horaDisponivel" required>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-success mt-4 w-100">Adicionar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2025 Reserva de Horários - Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function removerAgendamento(botao) {
+            botao.closest("tr").remove();
+            alert("Agendamento cancelado com sucesso!");
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let user = document.getElementById("username").value;
+            let pass = document.getElementById("password").value;
+
+            if (user === "admin" && pass === "adm123") {
+                document.getElementById("blur-overlay").style.display = "none";
+                document.getElementById("loginModal").style.display = "none";
+            } else {
+                alert("Usuário ou senha inválidos!");
+            }
+        });
+    </script>
+</body>
+</html>

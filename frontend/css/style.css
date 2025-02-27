@@ -1,0 +1,47 @@
+/* Reset básico */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Navbar */
+.navbar {
+    margin-bottom: 20px;
+}
+
+/* Container principal */
+.container {
+    max-width: 800px;
+}
+
+/* Títulos */
+h2, h4 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Formulários */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Botões */
+.btn {
+    font-weight: bold;
+}
+
+/* Tabelas */
+table {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Rodapé */
+footer {
+    margin-top: 40px;
+    padding: 10px 0;
+}
